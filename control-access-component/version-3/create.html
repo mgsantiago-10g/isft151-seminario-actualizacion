@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Create User Screen</title>
+</head>
+<body>
+
+<h1>Create User Form Screen</h1>
+<input id="usernameInput" type="text" placeholder="Nombre de usuario" value="">
+<input id="passwordInput" type="password" placeholder="Contraseña" value="">
+<button id="createUserButton">Create User</button>
+
+</body>
+
+<script type="text/javascript">
+	
+
+
+function getFormValues()
+{
+	let createFormData =
+	{
+		username: null,
+		password: null
+	};
+
+	createFormData.username = document.getElementById('usernameInput').value;
+	createFormData.password = document.getElementById('passwordInput').value;
+
+	return createFormData;
+}
+
+function onCreateUserButtonClick()
+{
+	fetch('./create-secured.php', { method:'post', body: JSON.stringify(getFormValues()) } ).then( response => response.json() ).then( response => { alert(response.description)} );
+	
+}
+
+document.getElementById('createUserButton').addEventListener('click', ()=>onCreateUserButtonClick() );
+
+</script>
+</html>
